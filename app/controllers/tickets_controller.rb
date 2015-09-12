@@ -35,8 +35,17 @@ class TicketsController < ApplicationController
 		response = RestClient.get(query)
 
 		if (response.body != "[]")
-			@ticket = JSON.parse(response.body)[0]
+			@ticket = JSON.parse(response.body)
 			session[:ticket] = @ticket
+
+			@ticket.each do |t|
+				response = RestClient.get(Global.api + "Violation/CitationNumber/" + t["citationNumber"].to_s)
+				t["violations"] = JSON.parse(response.body)
+			end
+
+			session[:first] = params[:first]
+			session[:last] = params[:last]
+
 			render "show"
 		else
 			@error = "Empty response."

@@ -1,7 +1,14 @@
-<h1>Ticket (#<%= @ticket["citationNumber"]%>)</h1>
-Court Date: <%= Date.strptime((@ticket['courtDate'].to_f / 1000).to_s, "%s") %>
-<p>Court Location: <%= @ticket["courtLocation"].capitalize %>, <%= @ticket["courtAddress"] %></p>
-<%= button_to "Dispute This Ticket", :tickets_dispute, params: {ticket_id: @ticket["citationNumber"]} %>
-<%= button_to "Pay This Ticket", :tickets_pay, params: {ticket_id: @ticket["citationNumber"]} %>
-<p>Name: <%= @ticket["lastName"] + ", " + @ticket["firstName"] %></p>
-<p>Driver's License Number: <%= @ticket["driversLicenseNumber"] %></p>
+<h1>Ticket information for <%= session[:last] %>, <%= session[:first] %></h1>
+
+<% @ticket.each do |t| %>
+	<h2>Ticket (#<%= t["citationNumber"]%>)</h2>
+	Court Date: <%= Date.strptime((t['courtDate'].to_f / 1000).to_s, "%s") %>
+	<p>Court Location: <%= t["courtLocation"].capitalize %>, <%= t["courtAddress"] %></p>
+	<%= button_to "Dispute This Ticket", :tickets_dispute, params: {ticket_id: t["citationNumber"]} %>
+	<%= button_to "Pay This Ticket", :tickets_pay, params: {ticket_id: t["citationNumber"]} %>
+
+	<% t["violations"].each do |v| %>
+		<h3>Violation</h3>
+		<%= v.to_s %>
+	<% end %>
+<% end %>
