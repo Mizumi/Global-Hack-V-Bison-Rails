@@ -21,7 +21,6 @@ class TicketsController < ApplicationController
 
 	def show
 		@error = nil;
-		#6/22 1958
 
 		query = Global.api + "Tickets"
 
@@ -35,8 +34,8 @@ class TicketsController < ApplicationController
 
 		response = RestClient.get(query)
 
-		if (response.body != "{}")
-			@ticket = JSON.parse(response.body)
+		if (response.body != "[]")
+			@ticket = JSON.parse(response.body)[0]
 			session[:ticket] = @ticket
 			render "show"
 		else

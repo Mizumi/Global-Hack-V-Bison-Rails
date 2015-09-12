@@ -1,4 +1,7 @@
-<h1>Ticket</h1>
+<h1>Ticket (#<%= @ticket["citationNumber"]%>)</h1>
+Court Date: <%= Date.strptime((@ticket['courtDate'].to_f / 1000).to_s, "%s") %>
+<p>Court Location: <%= @ticket["courtLocation"].capitalize %>, <%= @ticket["courtAddress"] %></p>
 <%= button_to "Dispute This Ticket", :tickets_dispute, params: {ticket_id: @ticket["citationNumber"]} %>
 <%= button_to "Pay This Ticket", :tickets_pay, params: {ticket_id: @ticket["citationNumber"]} %>
-<%= @ticket %>
+<p>Name: <%= @ticket["lastName"] + ", " + @ticket["firstName"] %></p>
+<p>Driver's License Number: <%= @ticket["driversLicenseNumber"] %></p>
