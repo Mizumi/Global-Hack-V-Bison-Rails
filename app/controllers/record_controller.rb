@@ -22,8 +22,10 @@ class RecordController < ApplicationController
 			session[:license] = params[:license]
 		end
 
+		@q = query
+
 		response = RestClient.get(query)
-		
+
 		if (response.body != "{}")
 			@data = JSON.parse(response.body)
 		else
