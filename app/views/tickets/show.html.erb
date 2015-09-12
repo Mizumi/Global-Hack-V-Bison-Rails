@@ -1,14 +1,31 @@
 <h1>Ticket information for <%= session[:last] %>, <%= session[:first] %></h1>
 
-<% @ticket.each do |t| %>
-	<h2>Ticket (#<%= t["citationNumber"]%>)</h2>
-	Court Date: <%= Date.strptime((t['courtDate'].to_f / 1000).to_s, "%s") %>
-	<p>Court Location: <%= t["courtLocation"].capitalize %>, <%= t["courtAddress"] %></p>
-	<%= button_to "Dispute This Ticket", :tickets_dispute, params: {ticket_id: t["citationNumber"]} %>
-	<%= button_to "Pay This Ticket", :tickets_pay, params: {ticket_id: t["citationNumber"]} %>
-
-	<% t["violations"].each do |v| %>
-		<h3>Violation</h3>
-		<%= v.to_s %>
-	<% end %>
+<% @tickets.each_with_index do |t, index| %>
+<div class="panel-group">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2>
+				<a data-toggle="collapse"  href="#collapse<%= index + 1 %>">Ticket #<%= t["citationNumber"]%></a>
+				<div style="float: right;">
+					<%= button_to "Dispute This Ticket", :tickets_dispute, params: {ticket: t["citationNumber"]} %>
+					<%= button_to "Pay This Ticket", :tickets_pay, params: {ticket: t["citationNumber"]} %>
+				</div>
+			</h2>
+		</div>
+		<div id="collapse<%= index + 1 %>" class="collapse">
+			<div class="panel-body">
+				<p>Court Date: <%= Date.strptime((t['courtDate'].to_f / 1000).to_s, "%s") %></p>
+				<p>Court Location: <%= t["courtLocation"].capitalize %>, <%= t["courtAddress"] %></p>
+				<% t["violations"].each do |v| %>
+					<h3>#<%= v["violationNumber"] %> - <%= v["violationDescription"] %></h3>
+					<p>Fine: <%= v["fineAmount"] %></p>
+					<p>Court Fee: <%= v["courtCost"] %></p>
+					<% if v["warrantStatus"] %>
+						<p><strong>There is a warrant for this person's arrest.</strong></p>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
 <% end %>

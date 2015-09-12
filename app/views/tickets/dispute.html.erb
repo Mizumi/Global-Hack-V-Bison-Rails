@@ -1,1 +1,9 @@
-<h1>Dispute This Ticket</h1>
+<h1>Dispute Ticket #<%= @ticket["citationNumber"] %></h1>
+
+
+<% @violations.each do |v| %>
+	<h2>Violation #<%= v["violationNumber"] %></h2>
+	<p><%= v["violationDescription"] %></p>
+	<p>Fine: <%= v["fineAmount"] %></p>
+	<p>Court Fees: <%= v["courtCost"] %></p>
+<% end %>
