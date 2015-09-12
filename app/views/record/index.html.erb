@@ -1,0 +1,10 @@
+<h1>Record Lookup</h1>
+<% if @error1 %>
+	<%= render "fld" %>
+<% elsif @error2 %>
+	<%= render "fldl" %>
+<% elsif @error3 %>
+	<h2>No records exist!  <%= link_to "Return to record search.", record_path%></h2>
+<% else %>
+	<%= render "fl" %>
+<% end %>
