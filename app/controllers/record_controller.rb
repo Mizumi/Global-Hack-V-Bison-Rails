@@ -10,15 +10,15 @@ class RecordController < ApplicationController
 	def get
 		query = @@apiPath
 
-		if params.length == 2
-			query = query + "/FirstName/" + params[:first] + "/LastName/" + params[:last]
+		if params[:dob] == nil && params[:license] == nil
+			query = @@apiPath + "/FirstName/" + params[:first] + "/LastName/" + params[:last]
 			session[:first] = params[:first]
 			session[:last] = params[:last]
-		elsif params.length == 3
-			query = query + "/FirstName/" + session[:first] + "/LastName/" + session[:last] + "/DoB/" + params[:dob]
+		elsif params[:license] == nil
+			query = @@apiPath + "/FirstName/" + session[:first] + "/LastName/" + session[:last] + "/DoB/" + params[:dob]
 			session[:dob] = params[:dob]
-		elsif params.length == 4
-			query = query + "/FirstName/" + session[:first] + "/LastName/" + session[:last] + "/DoB/" + session[:dob] + "/License/" + params[:license]
+		else
+			query = @@apiPath + "/FirstName/" + session[:first] + "/LastName/" + session[:last] + "/DoB/" + session[:dob] + "/License/" + params[:license]
 			session[:license] = params[:license]
 		end
 
