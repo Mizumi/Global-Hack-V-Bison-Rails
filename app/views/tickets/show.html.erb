@@ -5,11 +5,9 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h2>
+				<%= button_to "Dispute", :tickets_dispute, params: {ticket: t["citationNumber"]}, class: "pull-right" %>
+				<%= button_to "Pay", :tickets_pay, params: {ticket: t["citationNumber"]}, class: "pull-right" %>
 				<a data-toggle="collapse"  href="#collapse<%= index + 1 %>">Ticket #<%= t["citationNumber"]%></a>
-				<div style="float: right;">
-					<%= button_to "Dispute This Ticket", :tickets_dispute, params: {ticket: t["citationNumber"]} %>
-					<%= button_to "Pay This Ticket", :tickets_pay, params: {ticket: t["citationNumber"]} %>
-				</div>
 			</h2>
 		</div>
 		<div id="collapse<%= index + 1 %>" class="collapse">
