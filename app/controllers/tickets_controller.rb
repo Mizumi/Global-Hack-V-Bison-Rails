@@ -21,6 +21,7 @@ class TicketsController < ApplicationController
 
 	def show
 		@error = nil;
+		#6/22 1958
 
 		query = Global.api + "Tickets"
 
@@ -28,7 +29,7 @@ class TicketsController < ApplicationController
 			query = query + "/id/" + params[:ticket_id]
 		else
 			dob = Date.civil(params[:dob][:year].to_i, params[:dob][:month].to_i, params[:dob][:day].to_i)
-			dob = (dob.to_f * 1000).to_i
+			dob = (dob.to_time.to_i * 1000).to_s
 			query = query + "/FirstName/" + params[:first] + "/LastName/" + params[:last] + "/DoB/" + dob
 		end
 
