@@ -1,0 +1,4 @@
+<h1>Ticket</h1>
+<%= button_to "Dispute This Ticket", :tickets_dispute, params: {ticket_id: @ticket["citationNumber"]} %>
+<%= button_to "Pay This Ticket", :tickets_pay, params: {ticket_id: @ticket["citationNumber"]} %>
+<%= @ticket %>

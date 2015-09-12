@@ -1,0 +1,14 @@
+<h1>Find a Ticket</h1>
+<% if @error %>
+	<%= debug @error %>
+	<%= debug session %>
+	<%= debug params %>
+	<h2>There was an error searching for your ticket; please try again.</h2>
+<% end %>
+
+<%= form_tag(tickets_show_path) do %>
+	<%= text_field_tag :first, nil, placeholder: "First Name" %>
+	<%= text_field_tag :last, nil, placeholder: "Last Name" %>
+	<%= select_date Date.today, prefix: :dob %>
+	<%= submit_tag "Submit" %>
+<% end %>

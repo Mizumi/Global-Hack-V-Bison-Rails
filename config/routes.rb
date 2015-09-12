@@ -4,9 +4,12 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  get 'records' => 'record#index', :as => :record
+  get 'tickets' => 'tickets#find', :as => :tickets_find
+  post 'tickets' => 'tickets#show', :as => :tickets_show
 
-  post 'records/get' => 'record#get', :as => :record_get
+  post 'tickets/dispute' => 'tickets#dispute', :as => :tickets_dispute
+  post 'tickets/pay' => 'tickets#pay', :as => :tickets_pay
+
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
