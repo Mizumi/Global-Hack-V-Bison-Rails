@@ -53,6 +53,8 @@ GEM
     minitest (5.6.0)
     multi_json (1.11.0)
     rack (1.5.2)
+    rack-proxy (0.5.17)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.1.8)
@@ -114,6 +116,7 @@ DEPENDENCIES
   coffee-script-source (= 1.8.0)
   jbuilder (~> 2.0)
   jquery-rails
+  rack-proxy
   rails (= 4.1.8)
   rest-client
   sass-rails (~> 4.0.3)

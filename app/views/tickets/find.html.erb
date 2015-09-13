@@ -8,5 +8,7 @@
 	<%= text_field_tag :first, nil, placeholder: "First Name" %>
 	<%= text_field_tag :last, nil, placeholder: "Last Name" %>
 	<%= select_date Date.today, prefix: :dob, start_year: 1900 %>
+	<strong>OR</strong>
+	<%= text_field_tag :ticket_id, nil, placeholder: "Ticket ID" %>
 	<%= submit_tag "Submit" %>
 <% end %>

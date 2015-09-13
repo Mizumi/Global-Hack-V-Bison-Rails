@@ -43,8 +43,8 @@ class TicketsController < ApplicationController
 
 		query = Global.api + "Tickets"
 
-		if params[:ticket_id]
-			query = query + "/id/" + params[:ticket_id]
+		if params[:ticket_id].length > 0
+			query = query + "/CitationNumber/" + params[:ticket_id]
 		else
 			dob = Date.civil(params[:dob][:year].to_i, params[:dob][:month].to_i, params[:dob][:day].to_i)
 			dob = (dob.to_time.to_i * 1000).to_s
@@ -56,6 +56,7 @@ class TicketsController < ApplicationController
 		if (response.body != "[]")
 			@tickets = JSON.parse(response.body)
 			@tickets.each do |t|
+				@cute = t
 				response = RestClient.get(Global.api + "Violation/CitationNumber/" + t["citationNumber"].to_s)
 				t["violations"] = JSON.parse(response.body)
 			end
