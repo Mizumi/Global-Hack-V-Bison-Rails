@@ -24,8 +24,17 @@ class TicketsController < ApplicationController
 
 			@violationFees = 0
 			@violations.each do |v|
-				@violationFees += v["fineAmount"].gsub(/[^\d\.]/, '').to_f
-				@violationFees += v["courtCost"].gsub(/[^\d\.]/, '').to_f
+				begin
+					@violationFees += v["fineAmount"].gsub(/[^\d\.]/, '').to_f
+				rescue
+					puts "No violation fees."
+				end
+
+				begin
+					@violationFees += v["courtCost"].gsub(/[^\d\.]/, '').to_f
+				rescue
+					puts "No Violation fees."
+				end
 			end
 
 			render "resolve"
