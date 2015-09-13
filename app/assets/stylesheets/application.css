@@ -17,19 +17,43 @@
  */
 
  #ticket-search:before {
+     vertical-align: top;
  	content: '\f400';
  	display: inline-block;
  	-webkit-font-smoothing: antialiased;
  	font: normal 128px/1 'Genericons';
  	vertical-align: top;
+    text-align: center;
     color: #333;
  }
 
+ #ticket-search:after {
+     content: "Tickets";
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     height: 40px;
+     text-align: center;
+ }
+
  #metrics:before {
-     content: '\f436';
+     vertical-align: top;
+     content: '\f425';
   	 display: inline-block;
   	 -webkit-font-smoothing: antialiased;
   	 font: normal 160px/1 'Genericons';
   	 vertical-align: top;
+     text-align: center;
      color: #333;
+ }
+
+ #metrics:after {
+     content: "Metrics";
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     height: 40px;
+     text-align: center;
  }
