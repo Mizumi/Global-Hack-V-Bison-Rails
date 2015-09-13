@@ -1,4 +1,5 @@
-<h1>Resolve Ticket #<%= @ticket["citationNumber"] %> in <%= @court["municipality"].capitalize %></h1>
+<h1>Resolve Ticket #<%= @ticket["citationNumber"] %> (Court Date: <%= Date.strptime((@ticket['courtDate'].to_f / 1000).to_s, "%s") %>)</h1>
+<h3>Court Location: <%= @ticket["courtLocation"].capitalize %>, <%= @ticket["courtAddress"] %></h3>
 <div class="panel-group" id="accordion">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -11,13 +12,36 @@
 		<div id="collapse1" class="panel-collapse collapse in">
 			<div class="panel-body">
 				<h3>Total Fees and Fines: $<%= @violationFees %></h3>
-				<% if @court["onlinePayment"] %>
-					<h3>Visit <%= link_to @court["municipalCourtWebsite"], @court["municipalCourtWebsite"] %> to pay this ticket online. </h3>
+				<p>You should contact the court involved in this case as soon as possible to resolve your ticket.</p>
+				<% if @court["onlinePayment"] && (@court["municipalCourtWebsite"] != "none" || @court["municipalCourtWebsite"] != "none") %>
+					<% if @court["municipalCourtWebsite"] != "none" %>
+						<h3>Visit <%= link_to @court["municipalCourtWebsite"], @court["municipalCourtWebsite"] %> to pay this ticket online. </h3>
+					<% else %>
+						<h3>Visit <%= link_to @court["municipalWebsite"], @court["municipalWebsite"] %> to pay this ticket online. </h3>
+					<% end %>
+				<% elsif @violationFees > 0 %>
+					<% if !(@court["clerkPhoneNumber"].include? "not") %>
+						<h3>To find out how to pay your ticket, call the clerk at: <%= @court["clerkPhoneNumber"] %></h3>
+					<% elsif @court["municipalCourtWebsite"] != "none" || @court["municipalCourtWebsite"] != "none" %>
+						<% if @court["municipalWebsite"] != "none" %>
+							<h3>To find out how to pay your ticket, visit <%= link_to @court["municipalWebsite"], @court["municipalWebsite"] %>
+						<% else %>
+							<h3>To find out how to pay your ticket, visit <%= link_to @court["municipalCourtWebsite"], @court["municipalCourtWebsite"] %>
+						<% end %>
+					<% else %>
+						<h3>There is no additional contact information for the court involved in this case.</h3>
+					<% end %>
 				<% else %>
 					<% if !(@court["clerkPhoneNumber"].include? "not") %>
-						<h3>To find out how to pay, call the clerk at: <%= @court["clerkPhoneNumber"] %></h3>
+						<h3>To find out how to resolve your ticket, call a clerk at: <%= @court["clerkPhoneNumber"] %></h3>
+					<% elsif @court["municipalCourtWebsite"] != "none" || @court["municipalCourtWebsite"] != "none" %>
+						<% if @court["municipalWebsite"] != "none" %>
+							<h3>To find out how to resolve your ticket, visit <%= link_to @court["municipalWebsite"], @court["municipalWebsite"] %>
+						<% else %>
+							<h3>To find out how to resolve your ticket, visit <%= link_to @court["municipalCourtWebsite"], @court["municipalCourtWebsite"] %>
+						<% end %>
 					<% else %>
-						<h3>To find out how to pay, visit this municipalaties webiste at <%= @court["municipalWebsite"] %>
+						<h3>There is no additional contact information for the court involved in this case.</h3>
 					<% end %>
 				<% end %>
 			</div>
@@ -34,8 +58,8 @@
 		</div>
 		<div id="collapse2" class="panel-collapse collapse">
 			<div class="panel-body">
-				<h3>Court Date: <%= Date.strptime((@ticket['courtDate'].to_f / 1000).to_s, "%s") %></h3>
-				<h3>Court Location: <%= @ticket["courtLocation"].capitalize %>, <%= @ticket["courtAddress"] %></h3>
+				<p>If you believe you were wrongly ticketed, you can choose to dispute (fight) this ticket in court.  If you wish to do so, you want to make sure you begin the process before your court date (<%= Date.strptime((@ticket['courtDate'].to_f / 1000).to_s, "%s") %>).</p>
+				<h3>If you would like to seek legal counsel and help with disputing your ticket, please <%= link_to "click here", "https://www.reddit.com/r/legaladvice" %>.</h3>
 			</div>
 		</div>
 	</div>

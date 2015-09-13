@@ -7,14 +7,13 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Bison</title>
 
-        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-
-        <%= javascript_include_tag 'jquery.min' %>
-        <%= javascript_include_tag 'bootstrap.min' %>
-        <%= javascript_include_tag 'd3.min' %>
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'jquery.min', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'bootstrap.min', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'd3.min', 'data-turbolinks-track' => true %>
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

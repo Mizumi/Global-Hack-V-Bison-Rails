@@ -54,9 +54,15 @@ class TicketsController < ApplicationController
 		response = RestClient.get(query)
 
 		if (response.body != "[]")
-			@tickets = JSON.parse(response.body)
+			json = response.body
+			if !json.start_with? '['
+				json = '[' + json
+			end
+			if !json.end_with? ']'
+				json = json + ']'
+			end
+			@tickets = JSON.parse(json)
 			@tickets.each do |t|
-				@cute = t
 				response = RestClient.get(Global.api + "Violation/CitationNumber/" + t["citationNumber"].to_s)
 				t["violations"] = JSON.parse(response.body)
 			end
@@ -67,7 +73,6 @@ class TicketsController < ApplicationController
 			render "show"
 		else
 			@error = "Empty response."
-			render "find"
 		end
 	rescue Exception => msg
 		@error = msg
