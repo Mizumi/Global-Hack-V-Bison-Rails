@@ -1,4 +1,4 @@
-<h1>Enforcement and Judicial Accountability Metrics for <%= params[:place] %></h1>
+<h1>Enforcement and Judicial Accountability Metrics by Race for <%= params[:place] %></h1>
 <% if @error %>
 	<%= debug @error %>
 <% end %>
@@ -39,29 +39,54 @@
 	}
 </script>
 
-<table class="table table-bordered">
+<table class="table table-striped table-hover">
 	<thead>
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+		<th></th>
+        <th>White</th>
+        <th>Black</th>
+        <th>Hispanic</th>
+		<th>Asian</th>
+		<th>Indian</th>
+		<th>Other</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
+		<td>Vehicle Stops</td>
+        <td><%= @data["properties"]["white_vehicle_stops"]%></td>
+		<td><%= @data["properties"]["black_vehicle_stops"]%></td>
+		<td><%= @data["properties"]["hispanic_vehicle_stops"]%></td>
+		<td><%= @data["properties"]["asian_vehicle_stops"]%></td>
+		<td><%= @data["properties"]["indian_vehicle_stops"]%></td>
+		<td><%= @data["properties"]["other_vehicle_stops"]%></td>
       </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+	  <tr>
+		<td>Search Rate</td>
+		<td><%= @data["properties"]["white_search_rate"]%></td>
+	  	<td><%= @data["properties"]["black_search_rate"]%></td>
+	  	<td><%= @data["properties"]["hispanic_search_rate"]%></td>
+	  	<td><%= @data["properties"]["asian_search_rate"]%></td>
+	  	<td><%= @data["properties"]["indian_search_rate"]%></td>
+	  	<td><%= @data["properties"]["other_search_rate"]%></td>
+	  </tr>
+	  <tr>
+		<td>Contraband Hit Rate</td>
+		<td><%= @data["properties"]["white_contraband_hit_rate"]%></td>
+		<td><%= @data["properties"]["black_contraband_hit_rate"]%></td>
+		<td><%= @data["properties"]["hispanic_contraband_hit_rate"]%></td>
+		<td><%= @data["properties"]["asian_contraband_hit_rate"]%></td>
+		<td><%= @data["properties"]["indian_contraband_hit_rate"]%></td>
+		<td><%= @data["properties"]["other_contraband_hit_rate"]%></td>
+	  </tr>
+	  <tr>
+		<td>Arrest Rate</td>
+		<td><%= @data["properties"]["white_arrest_rate"]%></td>
+		<td><%= @data["properties"]["black_arrest_rate"]%></td>
+		<td><%= @data["properties"]["hispanic_arrest_rate"]%></td>
+		<td><%= @data["properties"]["asian_arrest_rate"]%></td>
+		<td><%= @data["properties"]["indian_arrest_rate"]%></td>
+		<td><%= @data["properties"]["other_arrest_rate"]%></td>
+	  </tr>
     </tbody>
 </table>

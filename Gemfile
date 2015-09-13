@@ -39,4 +39,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'rest-client'
 gem 'genericons-rails'
-gem 'd3-rails'

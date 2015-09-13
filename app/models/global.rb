@@ -4,6 +4,6 @@ class Global
 	end
 
 	def self.metrics
-		"bison.solutions.com:63342/global-hack-5/web-content/index.html"
+		"http://bison.solutions.com:63342/global-hack-5/web-content/index.html"
 	end
 end
