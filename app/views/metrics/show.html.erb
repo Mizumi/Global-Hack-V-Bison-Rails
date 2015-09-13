@@ -56,6 +56,16 @@
     </thead>
     <tbody>
 		<tr>
+		  <td>Percent of Population</td>
+		  <td><%= @data["properties"]["demographics_white_percentage"].length > 0 ? @data["properties"]["demographics_white_percentage"] : "N/A"%></td>
+  		  <td><%= @data["properties"]["demographics_black_percentage"].length > 0 ? @data["properties"]["demographics_black_percentage"] : "N/A"%></td>
+		  <td>N/A</td>
+  		  <td><%= @data["properties"]["demographics_asian_percentage"].length > 0 ? @data["properties"]["demographics_asian_percentage"] : "N/A"%></td>
+  		  <td>N/A</td>
+  		  <td><%= @data["properties"]["demographics_other_percentage"].length > 0 ? @data["properties"]["demographics_other_percentage"] : "N/A"%></td>
+		</tr>
+
+		<tr>
 		  <td>Vehicle Stops</td>
 		  <td><%= @data["properties"]["white_vehicle_stops"].length > 0 ? @data["properties"]["white_vehicle_stops"] : "N/A"%></td>
 		  <td><%= @data["properties"]["black_vehicle_stops"].length > 0 ? @data["properties"]["black_vehicle_stops"] : "N/A"%></td>
