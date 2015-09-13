@@ -1,4 +1,7 @@
-<h1>Enforcement and Judicial Accountability Metrics by Race for <%= params[:place] %></h1>
+<h1 style="text-align: center;">Enforcement and Judicial Metrics by Demographic for <%= params[:place] %></h1>
+<h2 style="text-align: center;">Total Population: <div class="text-success" style="display: inline"><%= @data["properties"]["total_population"] %></div></h2>
+<h2 style="text-align: center;"><div class="text-warning" style="display: inline"><%= @data["properties"]["fines_percentage_of_gr"] %>%</div> of gross revenue comes from fines.</h2>
+<h2 style="text-align: center;"><div class="text-danger" style="display: inline"><%= @data["properties"]["demographics_below_poverty_percentage"] %>%</div> of people are below the poverty line.</h2>
 <% if @error %>
 	<%= debug @error %>
 <% end %>
@@ -52,41 +55,42 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-		<td>Vehicle Stops</td>
-        <td><%= @data["properties"]["white_vehicle_stops"]%></td>
-		<td><%= @data["properties"]["black_vehicle_stops"]%></td>
-		<td><%= @data["properties"]["hispanic_vehicle_stops"]%></td>
-		<td><%= @data["properties"]["asian_vehicle_stops"]%></td>
-		<td><%= @data["properties"]["indian_vehicle_stops"]%></td>
-		<td><%= @data["properties"]["other_vehicle_stops"]%></td>
-      </tr>
+		<tr>
+		  <td>Vehicle Stops</td>
+		  <td><%= @data["properties"]["white_vehicle_stops"].length > 0 ? @data["properties"]["white_vehicle_stops"] : "N/A"%></td>
+		  <td><%= @data["properties"]["black_vehicle_stops"].length > 0 ? @data["properties"]["black_vehicle_stops"] : "N/A"%></td>
+		  <td><%= @data["properties"]["hispanic_vehicle_stops"].length > 0 ? @data["properties"]["hispanic_vehicle_stops"] : "N/A"%></td>
+		  <td><%= @data["properties"]["asian_vehicle_stops"].length > 0 ? @data["properties"]["asian_vehicle_stops"] : "N/A"%></td>
+		  <td><%= @data["properties"]["indian_vehicle_stops"].length > 0 ? @data["properties"]["indian_vehicle_stops"] : "N/A"%></td>
+		  <td><%= @data["properties"]["other_vehicle_stops"].length > 0 ? @data["properties"]["other_vehicle_stops"] : "N/A"%></td>
+		</tr>
+
 	  <tr>
 		<td>Search Rate</td>
-		<td><%= @data["properties"]["white_search_rate"]%></td>
-	  	<td><%= @data["properties"]["black_search_rate"]%></td>
-	  	<td><%= @data["properties"]["hispanic_search_rate"]%></td>
-	  	<td><%= @data["properties"]["asian_search_rate"]%></td>
-	  	<td><%= @data["properties"]["indian_search_rate"]%></td>
-	  	<td><%= @data["properties"]["other_search_rate"]%></td>
+		<td><%= @data["properties"]["white_search_rate"].length > 0 ? @data["properties"]["white_search_rate"] : "N/A"%></td>
+	  	<td><%= @data["properties"]["black_search_rate"].length > 0 ? @data["properties"]["black_search_rate"] : "N/A"%></td>
+	  	<td><%= @data["properties"]["hispanic_search_rate"].length > 0 ? @data["properties"]["hispanic_search_rate"] : "N/A"%></td>
+	  	<td><%= @data["properties"]["asian_search_rate"].length > 0 ? @data["properties"]["asian_search_rate"] : "N/A"%></td>
+	  	<td><%= @data["properties"]["indian_search_rate"].length > 0 ? @data["properties"]["indian_search_rate"] : "N/A"%></td>
+	  	<td><%= @data["properties"]["other_search_rate"].length > 0 ? @data["properties"]["other_search_rate"] : "N/A"%></td>
 	  </tr>
 	  <tr>
 		<td>Contraband Hit Rate</td>
-		<td><%= @data["properties"]["white_contraband_hit_rate"]%></td>
-		<td><%= @data["properties"]["black_contraband_hit_rate"]%></td>
-		<td><%= @data["properties"]["hispanic_contraband_hit_rate"]%></td>
-		<td><%= @data["properties"]["asian_contraband_hit_rate"]%></td>
-		<td><%= @data["properties"]["indian_contraband_hit_rate"]%></td>
-		<td><%= @data["properties"]["other_contraband_hit_rate"]%></td>
+		<td><%= @data["properties"]["white_contraband_hit_rate"].length > 0 ? @data["properties"]["white_contraband_hit_rate"] : "N/A"%></td>
+		<td><%= @data["properties"]["black_contraband_hit_rate"].length > 0 ? @data["properties"]["black_contraband_hit_rate"] : "N/A"%></td>
+		<td><%= @data["properties"]["hispanic_contraband_hit_rate"].length > 0 ? @data["properties"]["hispanic_contraband_hit_rate"] : "N/A"%></td>
+		<td><%= @data["properties"]["asian_contraband_hit_rate"].length > 0 ? @data["properties"]["asian_contraband_hit_rate"] : "N/A"%></td>
+		<td><%= @data["properties"]["indian_contraband_hit_rate"].length > 0 ? @data["properties"]["indian_contraband_hit_rate"] : "N/A"%></td>
+		<td><%= @data["properties"]["other_contraband_hit_rate"].length > 0 ? @data["properties"]["other_contraband_hit_rate"] : "N/A"%></td>
 	  </tr>
 	  <tr>
 		<td>Arrest Rate</td>
-		<td><%= @data["properties"]["white_arrest_rate"]%></td>
-		<td><%= @data["properties"]["black_arrest_rate"]%></td>
-		<td><%= @data["properties"]["hispanic_arrest_rate"]%></td>
-		<td><%= @data["properties"]["asian_arrest_rate"]%></td>
-		<td><%= @data["properties"]["indian_arrest_rate"]%></td>
-		<td><%= @data["properties"]["other_arrest_rate"]%></td>
+		<td><%= @data["properties"]["white_arrest_rate"].length > 0 ? @data["properties"]["white_arrest_rate"] : "N/A"%></td>
+		<td><%= @data["properties"]["black_arrest_rate"].length > 0 ? @data["properties"]["black_arrest_rate"] : "N/A"%></td>
+		<td><%= @data["properties"]["hispanic_arrest_rate"].length > 0 ? @data["properties"]["hispanic_arrest_rate"] : "N/A"%></td>
+		<td><%= @data["properties"]["asian_arrest_rate"].length > 0 ? @data["properties"]["asian_arrest_rate"] : "N/A"%></td>
+		<td><%= @data["properties"]["indian_arrest_rate"].length > 0 ? @data["properties"]["indian_arrest_rate"] : "N/A"%></td>
+		<td><%= @data["properties"]["other_arrest_rate"].length > 0 ? @data["properties"]["other_arrest_rate"] : "N/A"%></td>
 	  </tr>
     </tbody>
 </table>
