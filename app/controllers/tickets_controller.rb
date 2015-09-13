@@ -1,5 +1,7 @@
 class TicketsController < ApplicationController
 	def dispute
+		@error = nil;
+
 		if params[:ticket]
 			query = Global.api + "Tickets/CitationNumber/" + params[:ticket].to_s
 			response = RestClient.get(query)
@@ -9,40 +11,49 @@ class TicketsController < ApplicationController
 			response = RestClient.get(query)
 			@violations = JSON.parse(response.body)
 
-			@violationFines = 0
-			@violationCourtFees = 0
+			@violationFees = 0
 			@violations.each do |v|
-				@violationFines += v["fineAmount"].to_f
-				@violationCourtFees += v["courtCost"].to_f
+				@violationFees += v["fineAmount"].to_f
+				@violationFees += v["courtCost"].to_f
 			end
 
 			render "dispute"
 		else
 			render "find"
 		end
+
+	rescue Exception => msg
+		@error = msg
+		render "find"
 	end
 
 	def pay
+		@error = nil;
+
 		if params[:ticket]
 			query = Global.api + "Tickets/CitationNumber/" + params[:ticket].to_s
 			response = RestClient.get(query)
 			@ticket = JSON.parse(response.body)
 
-			query = Global.api + "Violation/CitationNumber/" + params[:ticket].to_s
-			response = RestClient.get(query)
-			@violations = JSON.parse(response.body)
+			query = Global.api + "Court/Municipality/"
+			response = RestClient.post(query, @ticket["courtLocation"].to_s)
+			@court = JSON.parse(response.body)
 
-			@violationFines = 0
-			@violationCourtFees = 0
-			@violations.each do |v|
-				@violationFines += v["fineAmount"].to_f
-				@violationCourtFees += v["courtCost"].to_f
+			while !(@court["municipalCourt"].include? "X") &&
+				    @court["municipalCourt"] != "NONE"
+				query = Global.api + "Court/Municipality/"
+				response = RestClient.post(query, @court["municipalCourt"].to_s)
+				@court = JSON.parse(response.body)
 			end
 
 			render "pay"
 		else
 			render "find"
 		end
+
+	rescue Exception => msg
+		@error = msg
+		render "find"
 	end
 
 	def show

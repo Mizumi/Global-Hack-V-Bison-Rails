@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post 'tickets/dispute' => 'tickets#dispute', :as => :tickets_dispute
   post 'tickets/pay' => 'tickets#pay', :as => :tickets_pay
 
+  get 'metrics' => 'metrics#index', :as => :metrics
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

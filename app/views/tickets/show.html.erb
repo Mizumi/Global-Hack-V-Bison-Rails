@@ -12,7 +12,6 @@
 		</div>
 		<div id="collapse<%= index + 1 %>" class="collapse">
 			<div class="panel-body">
-				<p>Court Date: <%= Date.strptime((t['courtDate'].to_f / 1000).to_s, "%s") %></p>
 				<p>Court Location: <%= t["courtLocation"].capitalize %>, <%= t["courtAddress"] %></p>
 				<% t["violations"].each do |v| %>
 					<h3>#<%= v["violationNumber"] %> - <%= v["violationDescription"] %></h3>
