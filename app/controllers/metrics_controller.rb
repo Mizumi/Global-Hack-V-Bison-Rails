@@ -1,6 +1,6 @@
 class MetricsController < ApplicationController
 	def index
-		redirect_to "bisonsolutions.cloudapp.net:8080/metrics/"
+		redirect_to Global.metrics
 	end
 
 	def show
@@ -11,6 +11,6 @@ class MetricsController < ApplicationController
 		render "show"
 	rescue Exception => msg
 		@error = msg
-		redirect_to "bisonsolutions.cloudapp.net:8080/metrics/"
+		redirect_to Global.metrics
 	end
 end
