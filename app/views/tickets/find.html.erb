@@ -4,11 +4,42 @@
 	<h2>There was an error searching for your ticket; please try again.</h2>
 <% end %>
 
-<%= form_tag(tickets_show_path) do %>
-	<%= text_field_tag :first, nil, placeholder: "First Name" %>
-	<%= text_field_tag :last, nil, placeholder: "Last Name" %>
-	<%= select_date Date.today, prefix: :dob, start_year: 1900 %>
-	<strong>OR</strong>
-	<%= text_field_tag :ticket_id, nil, placeholder: "Ticket ID" %>
-	<%= submit_tag "Submit" %>
+<h2>By Ticket ID...</h2>
+<%= form_tag tickets_show_path, :class => "form-horizontal", :role => "form" do %>
+	<div class="form-group">
+		<div class="col-sm.5">
+			<%= text_field_tag :ticket_id, nil, placeholder: "Ticket ID", class: "form-control" %>
+		</div>
+	</div>
+
+	<div class="form-group">
+   		<div class="col-sm.5">
+			<%= submit_tag "Submit", class: "btn btn-default" %>
+   		</div>
+ 	</div>
+<% end %>
+
+<h2>By name and birthday...</h2>
+<%= form_tag tickets_show_path, :class => "form-horizontal", :role => "form" do %>
+	<div class="form-group">
+		<div class="col-sm.5">
+			<%= text_field_tag :first, nil, placeholder: "First Name", class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm.5">
+			<%= text_field_tag :last, nil, placeholder: "Last Name", class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm.5">
+			<%= select_date Date.today, prefix: :dob, start_year: 1900, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm.5">
+			<%= submit_tag "Submit", class: "btn btn-default" %>
+		</div>
+	</div>
 <% end %>

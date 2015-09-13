@@ -43,7 +43,7 @@ class TicketsController < ApplicationController
 
 		query = Global.api + "Tickets"
 
-		if params[:ticket_id].length > 0
+		if params[:ticket_id] && params[:ticket_id].length > 0
 			query = query + "/CitationNumber/" + params[:ticket_id]
 		else
 			dob = Date.civil(params[:dob][:year].to_i, params[:dob][:month].to_i, params[:dob][:day].to_i)
@@ -67,8 +67,8 @@ class TicketsController < ApplicationController
 				t["violations"] = JSON.parse(response.body)
 			end
 
-			session[:first] = params[:first]
-			session[:last] = params[:last]
+			session[:first] = @tickets[0]["firstName"]
+			session[:last] = @tickets[0]["lastName"]
 
 			render "show"
 		else
