@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'tickets/resolve' => 'tickets#resolve', :as => :tickets_resolve
 
   get 'metrics' => 'metrics#index', :as => :metrics
+  get 'metrics/show' => 'metrics#show', :as => :metrics_show
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

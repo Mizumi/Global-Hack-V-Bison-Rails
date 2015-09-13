@@ -1,0 +1,67 @@
+<h1>Enforcement and Judicial Accountability Metrics for <%= params[:place] %></h1>
+<% if @error %>
+	<%= debug @error %>
+<% end %>
+
+<link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+<%= stylesheet_link_tag "http://js.arcgis.com/3.14/esri/css/esri.css" %>
+<style>
+	html, body, #map {
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	#map {
+		height: 40%;
+	}
+	body {
+		background-color: #FFF;
+		overflow: hidden;
+		font-family: "Trebuchet MS";
+	}
+</style>
+<%= javascript_include_tag "http://js.arcgis.com/3.14/" %>
+<script type="text/javascript">
+	makeMeAMap(38.62, -90.21);
+	function makeMeAMap(latude, longitude) {
+		console.log("Hey!");
+		var map;
+		require(["esri/map", "dojo/domReady!"], function (Map) {
+			map = new Map("map", {
+				basemap: "streets",  //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
+				center: [longitude, latude],
+				zoom: 13
+			});
+			console.log("Done!");
+		});
+		console.log("Done!");
+	}
+</script>
+
+<table class="table table-striped">
+	<thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+</table>

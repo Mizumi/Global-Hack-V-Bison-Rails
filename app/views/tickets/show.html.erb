@@ -2,10 +2,14 @@
 
 <% @tickets.each_with_index do |t, index| %>
 <div class="panel-group">
-	<div class="panel panel-default">
+	<% if t["warrantStatus"] %>
+		<div class="panel panel-warning">
+	<% else %>
+		<div class="panel panel-default">
+	<% end %>
 		<div class="panel-heading">
 			<h2>
-				<%= button_to "Resolve", :tickets_resolve, params: {ticket: t["citationNumber"]}, class: "pull-right btn btn-default" %>			
+				<%= button_to "Resolve", :tickets_resolve, params: {ticket: t["citationNumber"]}, class: "pull-right btn btn-default" %>
 				<a data-toggle="collapse"  href="#collapse<%= index + 1 %>">Ticket #<%= t["citationNumber"]%></a>
 			</h2>
 		</div>
@@ -17,7 +21,7 @@
 					<p>Fine: <%= v["fineAmount"] %></p>
 					<p>Court Fee: <%= v["courtCost"] %></p>
 					<% if v["warrantStatus"] %>
-						<p><strong>There is a warrant for this person's arrest.</strong></p>
+						<p><strong>There is a warrant for this person's arrest due to this violation.</strong></p>
 					<% end %>
 				<% end %>
 			</div>

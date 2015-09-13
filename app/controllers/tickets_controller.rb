@@ -24,8 +24,8 @@ class TicketsController < ApplicationController
 
 			@violationFees = 0
 			@violations.each do |v|
-				@violationFees += v["fineAmount"].to_f
-				@violationFees += v["courtCost"].to_f
+				@violationFees += v["fineAmount"].gsub(/[^\d\.]/, '').to_f
+				@violationFees += v["courtCost"].gsub(/[^\d\.]/, '').to_f
 			end
 
 			render "resolve"
@@ -65,6 +65,11 @@ class TicketsController < ApplicationController
 			@tickets.each do |t|
 				response = RestClient.get(Global.api + "Violation/CitationNumber/" + t["citationNumber"].to_s)
 				t["violations"] = JSON.parse(response.body)
+				t["violations"].each do |v|
+					if v["warrantStatus"]
+						t["warrantStatus"] = true
+					end
+				end
 			end
 
 			session[:first] = @tickets[0]["firstName"]
