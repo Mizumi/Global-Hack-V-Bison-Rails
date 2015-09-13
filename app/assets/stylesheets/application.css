@@ -11,6 +11,25 @@
  * file per style scope.
  *
  *= require bootstrap.min
+ *= require genericons
  *= require_tree .
  *= require_self
  */
+
+ #ticket-search:before {
+ 	content: '\f400';
+ 	display: inline-block;
+ 	-webkit-font-smoothing: antialiased;
+ 	font: normal 128px/1 'Genericons';
+ 	vertical-align: top;
+    color: #333;
+ }
+
+ #metrics:before {
+     content: '\f436';
+  	 display: inline-block;
+  	 -webkit-font-smoothing: antialiased;
+  	 font: normal 160px/1 'Genericons';
+  	 vertical-align: top;
+     color: #333;
+ }
