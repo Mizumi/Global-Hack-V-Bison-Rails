@@ -1,0 +1,42 @@
+<h1>Resolve Ticket #<%= @ticket["citationNumber"] %> in <%= @court["municipality"].capitalize %></h1>
+<div class="panel-group" id="accordion">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2 class="panel-title">
+			<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+				Pay the Ticket
+			</a>
+			</h2>
+		</div>
+		<div id="collapse1" class="panel-collapse collapse in">
+			<div class="panel-body">
+				<p>Total Fees and Fines: $<%= @violationFees %></p>
+				<% if @court["onlinePayment"] %>
+					<h3>Visit <%= @court["municipalCourtWebsite"] %> to pay this ticket online. </h3>
+				<% else %>
+					<% if !(@court["clerkPhoneNumber"].include? "not") %>
+						<h3>To find out how to pay, call the clerk at: <%= @court["clerkPhoneNumber"] %></h3>
+					<% else %>
+						<h3>To find out how to pay, visit this municipalaties webiste at <%= @court["municipalWebsite"] %>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2 class="panel-title">
+			<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+				Dispute the Ticket
+			</a>
+			</h2>
+		</div>
+		<div id="collapse2" class="panel-collapse collapse">
+			<div class="panel-body">
+				<p>Court Date: <%= Date.strptime((@ticket['courtDate'].to_f / 1000).to_s, "%s") %></p>
+				<p>Court Location: <%= @ticket["courtLocation"].capitalize %>, <%= @ticket["courtAddress"] %></p>
+			</div>
+		</div>
+	</div>
+</div>

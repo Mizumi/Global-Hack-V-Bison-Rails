@@ -6,9 +6,7 @@ Rails.application.routes.draw do
 
   get 'tickets' => 'tickets#find', :as => :tickets_find
   post 'tickets' => 'tickets#show', :as => :tickets_show
-
-  post 'tickets/dispute' => 'tickets#dispute', :as => :tickets_dispute
-  post 'tickets/pay' => 'tickets#pay', :as => :tickets_pay
+  post 'tickets/resolve' => 'tickets#resolve', :as => :tickets_resolve
 
   get 'metrics' => 'metrics#index', :as => :metrics
 

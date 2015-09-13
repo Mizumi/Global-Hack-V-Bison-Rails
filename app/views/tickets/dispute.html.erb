@@ -1,4 +1,0 @@
-<h1>Dispute Ticket #<%= @ticket["citationNumber"] %></h1>
-<p>Total Fees and Fines: $<%= @violationFees %></p>
-<p>Court Date: <%= Date.strptime((@ticket['courtDate'].to_f / 1000).to_s, "%s") %></p>
-<p>Court Location: <%= @ticket["courtLocation"].capitalize %>, <%= @ticket["courtAddress"] %></p>

@@ -1,33 +1,5 @@
 class TicketsController < ApplicationController
-	def dispute
-		@error = nil;
-
-		if params[:ticket]
-			query = Global.api + "Tickets/CitationNumber/" + params[:ticket].to_s
-			response = RestClient.get(query)
-			@ticket = JSON.parse(response.body)
-
-			query = Global.api + "Violation/CitationNumber/" + params[:ticket].to_s
-			response = RestClient.get(query)
-			@violations = JSON.parse(response.body)
-
-			@violationFees = 0
-			@violations.each do |v|
-				@violationFees += v["fineAmount"].to_f
-				@violationFees += v["courtCost"].to_f
-			end
-
-			render "dispute"
-		else
-			render "find"
-		end
-
-	rescue Exception => msg
-		@error = msg
-		render "find"
-	end
-
-	def pay
+	def resolve
 		@error = nil;
 
 		if params[:ticket]
@@ -46,7 +18,17 @@ class TicketsController < ApplicationController
 				@court = JSON.parse(response.body)
 			end
 
-			render "pay"
+			query = Global.api + "Violation/CitationNumber/" + params[:ticket].to_s
+			response = RestClient.get(query)
+			@violations = JSON.parse(response.body)
+
+			@violationFees = 0
+			@violations.each do |v|
+				@violationFees += v["fineAmount"].to_f
+				@violationFees += v["courtCost"].to_f
+			end
+
+			render "resolve"
 		else
 			render "find"
 		end
